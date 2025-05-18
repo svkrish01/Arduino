@@ -3,7 +3,7 @@ Developer   - Sriram Venkata Krishna
 Date        - 18-05-2025
 */
 
-//Blinking LED
+//Arduino Tester
 
 const int LED_Pin = 13;
 const int Time = 1000;
