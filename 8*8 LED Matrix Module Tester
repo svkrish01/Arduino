@@ -1,0 +1,50 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 18-05-2025
+*/
+
+//8*8 LED Matrix Module Tester
+
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS = 11;
+const int CLK = 12;
+
+const int Time = 100;
+
+int X, Y;
+
+LedControl LED_Matrix(DIN, CLK, CS, 1);
+
+void setup()
+{
+  LED_Matrix.shutdown(0, false);
+  LED_Matrix.setIntensity(0, 8);
+  LED_Matrix.clearDisplay(0);
+}
+
+void loop()
+{
+  for(X = 0; X <= 7; X++)
+  {
+    for(Y = 0; Y <= 7; Y++)
+    {
+      LED_Matrix.setLed(0, X, Y, true);
+
+      delay(Time);
+
+      LED_Matrix.setLed(0, X, Y, false);
+    }
+  }
+}
+
+
+/*
+Connections -
+VCC     - 5V
+GND     - Ground
+DIN     - Digital Pin 10
+CS      - Digital Pin 11
+CLK     - Digital Pin 12
+*/
