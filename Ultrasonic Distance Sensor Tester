@@ -21,17 +21,36 @@ void setup()
 void loop()
 {
   digitalWrite(Trig_Pin, LOW);
-  delay(2);
+  delayMicroseconds(2);
   digitalWrite(Trig_Pin, HIGH);
-  delay(10);
+  delayMicroseconds(10);
   digitalWrite(Trig_Pin, LOW);
 
-  Duration = pulseIn(Echo_Pin, HIGH);
-  Distance = (Duration*0.343)/2;
+  Duration = pulseIn(Echo_Pin, HIGH, 30000);
+  Distance = (Duration*0.343)/20;
 
-  Serial.print("Distance : ");
-  Serial.print(Distance);
-  Serial.println(" m");
-
-  delay(100);
+  if(Duration == 0)
+  {
+    Serial.println("No Object Detected");
+  }
+  else
+  {
+    Serial.print("Distance : ");
+    Serial.print(Distance);
+    Serial.print(" cm");
+    Serial.print(", Duration : ");
+    Serial.print(Duration);
+    Serial.println(" µs");
+  }
+  
+  delay(500);
 }
+
+
+/*
+Connections -
+VCC             - 5V
+Gnd             - Ground
+Trigger Pin     - Digital Pin 8
+Echo Pin        - Digital Pin 9
+*/
