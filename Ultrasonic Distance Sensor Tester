@@ -1,0 +1,37 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 18-05-2025
+*/
+
+//Ultrasonic Distance Sensor Tester
+
+const int Trig_Pin = 8;
+const int Echo_Pin = 9;
+
+float Distance, Duration;
+
+void setup()
+{
+  pinMode(Trig_Pin, OUTPUT);
+  pinMode(Echo_Pin, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  digitalWrite(Trig_Pin, LOW);
+  delay(2);
+  digitalWrite(Trig_Pin, HIGH);
+  delay(10);
+  digitalWrite(Trig_Pin, LOW);
+
+  Duration = pulseIn(Echo_Pin, HIGH);
+  Distance = (Duration*0.343)/2;
+
+  Serial.print("Distance : ");
+  Serial.print(Distance);
+  Serial.println(" m");
+
+  delay(100);
+}
