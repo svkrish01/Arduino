@@ -1,0 +1,42 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 18-05-2025
+*/
+
+//Joystick Module Tester
+
+const int SW = 6;
+
+const int Delay = 500;
+
+int X, Y;
+
+void setup()
+{
+  pinMode(SW, INPUT_PULLUP);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+ X = analogRead(A0);
+ Y = analogRead(A1);
+
+ Serial.print("X : ");
+ Serial.print(X);
+ Serial.print(", Y : ");
+ Serial.println(Y);
+
+ delay(Delay);
+}
+
+
+/*
+Connections -
+VCC     - 5V
+GND     - Ground
+SW      - Digital Pin 6
+VRX     - Analog Pin 0
+VRY     - Analog Pin 1
+*/
