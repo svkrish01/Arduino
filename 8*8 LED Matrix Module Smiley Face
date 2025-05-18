@@ -1,0 +1,45 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 18-05-2025
+*/
+
+//8*8 LED Matrix Module Smiley Face
+
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS = 11;
+const int CLK = 12;
+
+const byte Smiley_Face[8] = {0b00111100, 0b01000010, 0b10100101, 0b10000001, 0b10100101, 0b10011001, 0b01000010, 0b00111100};
+
+const int Time = 100;
+
+int X;
+
+LedControl LED_Matrix(DIN, CLK, CS, 1);
+
+void setup()
+{
+  LED_Matrix.shutdown(0, false);
+  LED_Matrix.setIntensity(0, 8);
+  LED_Matrix.clearDisplay(0);
+}
+
+void loop()
+{
+  for(X = 0; X <= 7; X++)
+  {
+    LED_Matrix.setRow(0, X, Smiley_Face[X]);
+  }
+}
+
+
+/*
+Connections -
+VCC     - 5V
+GND     - Ground
+DIN     - Digital Pin 10
+CS      - Digital Pin 11
+CLK     - Digital Pin 12
+*/
