@@ -38,9 +38,9 @@ void loop()
     Serial.print("Distance : ");
     Serial.print(Distance);
     Serial.print(" cm");
-    Serial.print(", Duration : ");
+    Serial.print(" (Duration : ");
     Serial.print(Duration);
-    Serial.println(" µs");
+    Serial.println(" µs)");
   }
   
   delay(500);
