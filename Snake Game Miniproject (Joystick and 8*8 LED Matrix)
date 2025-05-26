@@ -1,0 +1,215 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 26-05-2025
+*/
+
+//Snake Game Miniproject (Joystick and 8*8 LED Matrix)
+
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS = 11;
+const int CLK = 12;
+const int SW = 6;
+LedControl LED_Matrix(DIN, CLK, CS, 1);
+
+const byte Astonished_Face[8] = {B00111100, B01000010, B10100101, B10000001, B10011001, B10011001, B01000010, B00111100};
+
+const int Delay = 500;
+
+int X, Y;
+int Old_Direction, New_Direction;
+
+int Length;
+int Snake[64][2];
+int Fruit[2];
+int Head[2];
+
+int ModWrap(int x, int y)
+{
+  int r = x % y;
+
+  if (r == 0){return y;}
+  else {return r;}
+}
+
+int Next_Snake_Orientation(int Old_Joystick_Orientation)
+{
+ X = analogRead(A0);
+ Y = analogRead(A1);
+ int New_Joystick_Orientation;
+
+ if(Y <= 256){New_Joystick_Orientation = 1;}
+ else if(Y >= 768){New_Joystick_Orientation = 3;}
+ else if(X <= 256){New_Joystick_Orientation = 4;}
+ else if(X >= 768){New_Joystick_Orientation = 2;}
+ else{New_Joystick_Orientation = 0;}
+
+ Serial.print("Orientation : ");
+ Serial.print(New_Joystick_Orientation);
+ Serial.print(" (X : ");
+ Serial.print(X);
+ Serial.print(", Y : ");
+ Serial.print(Y);
+ Serial.println(")");
+
+ if (New_Joystick_Orientation == 0){return Old_Joystick_Orientation;}
+ else if (New_Joystick_Orientation == ModWrap(Old_Joystick_Orientation+2, 4)){return Old_Joystick_Orientation;}
+ else {return New_Joystick_Orientation;}
+}
+
+void Check_Collision()
+{
+  int Check = 0;
+
+  for(X = 1; X < Length; X++)
+    {
+      if(Snake[X][0] == Head[0] && Snake[X][1] == Head[1])
+      {
+        Check = 1;
+      }
+    }
+
+  while(Check == 1)
+  {
+    for(X = 0; X <= 7; X++)
+    {
+     LED_Matrix.setRow(0, X, Astonished_Face[X]);
+    }
+
+    delay(1000);
+  }
+}
+
+void Update_Fruit()
+{
+  int Check;
+
+  do
+  {
+    Check = 0;
+
+    Fruit[0] = random(0, 8);
+    Fruit[1] = random(0, 8);
+
+    for(X = 0; X < Length; X++)
+    {
+      if(Snake[X][0] == Fruit[0] && Snake[X][1] == Fruit[1])
+      {
+        Check = 1;
+      }
+    }
+  }
+  while(Check == 1);
+}
+
+void Update_Head(int Direction)
+{
+  int Change[2];
+
+  if (Direction == 1){Change[0] = -1; Change[1] = 0;}
+  if (Direction == 2){Change[0] = 0; Change[1] = 1;}
+  if (Direction == 3){Change[0] = 1; Change[1] = 0;}
+  if (Direction == 4){Change[0] = 0; Change[1] = -1;}
+
+  Head[0] = (Change[0] + Snake[0][0] + 8)%8;
+  Head[1] = (Change[1] + Snake[0][1] + 8)%8;
+}
+
+void Update_Matrix()
+{
+  if(Head[0] == Fruit[0] && Head[1] == Fruit[1])
+  {
+    Length++;
+
+    for(X = Length-1; X > 0; X--)
+    {
+      Snake[X][0] = Snake[X-1][0];
+      Snake[X][1] = Snake[X-1][1];
+    }
+
+    Snake[0][0] = Head[0];
+    Snake[0][1] = Head[1];
+
+    Update_Fruit();
+  }
+  else
+  {
+    for(X = Length-1; X > 0; X--)
+    {
+      Snake[X][0] = Snake[X-1][0];
+      Snake[X][1] = Snake[X-1][1];
+    }
+
+    Snake[0][0] = Head[0];
+    Snake[0][1] = Head[1];
+  }
+
+  LED_Matrix.clearDisplay(0);
+  for(X = 0; X < Length; X++)
+  {
+    LED_Matrix.setLed(0, Snake[X][0], Snake[X][1], true);
+  }
+  LED_Matrix.setLed(0, Fruit[0], Fruit[1], true);
+}
+
+
+void setup()
+{
+  pinMode(SW, INPUT_PULLUP);
+
+  LED_Matrix.shutdown(0, false);
+  LED_Matrix.setIntensity(0, 8);
+  LED_Matrix.clearDisplay(0);
+
+  Old_Direction = 1;
+  Length = 2;
+
+  for(X = 0; X < 64 ; X++)
+  {
+    for(Y = 0; Y < 2; Y++)
+    {
+      Snake[X][Y] = 0;
+    }
+  }
+  Snake[0][0] = 6;
+  Snake[0][1] = 0;
+  Snake[1][0] = 7;
+  Snake[1][1] = 0;
+  Fruit[0] = 3;
+  Fruit[1] = 4;
+
+  Serial.begin(9600);
+}
+
+
+void loop()
+{
+ New_Direction = Next_Snake_Orientation(Old_Direction);
+
+ Update_Head(New_Direction);
+
+ Check_Collision();
+
+ Update_Matrix();
+
+ Old_Direction = New_Direction;
+ delay(Delay);
+}
+
+
+/*
+Joystick Connections -
+VCC     - 5V
+GND     - Ground
+SW      - Digital Pin 6
+VRX     - Analog Pin 0
+VRY     - Analog Pin 1
+
+8*8 LED Matrix Connections -
+VCC     - 5V
+GND     - Ground
+DIN     - Digital Pin 10
+CS      - Digital Pin 11
+CLK     - Digital Pin 12
+*/
