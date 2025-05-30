@@ -51,7 +51,7 @@ void loop()
 /*
 Connections -
 VCC             - 5V
-Gnd             - Ground
+GND             - Ground
 Trigger Pin     - Digital Pin 8
 Echo Pin        - Digital Pin 9
 */
