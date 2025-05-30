@@ -4,7 +4,7 @@ Date        - 18-05-2025
 Board       - Arduino Uno R3
 */
 
-//Arduino Uno R3 Tester
+//Arduino Uno R3 Board Tester
 
 const int LED_Pin = 13;
 const int Time = 1000;
