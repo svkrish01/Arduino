@@ -1,9 +1,10 @@
 /*
 Developer   - Sriram Venkata Krishna
 Date        - 18-05-2025
+Board       - Arduino Uno R3
 */
 
-//Arduino Tester
+//Arduino Uno R3 Tester
 
 const int LED_Pin = 13;
 const int Time = 1000;
