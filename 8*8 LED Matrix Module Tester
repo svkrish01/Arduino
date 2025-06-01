@@ -12,7 +12,7 @@ const int DIN = 10;
 const int CS = 11;
 const int CLK = 12;
 
-const int Time = 100;
+const int Time_Delay = 100;
 
 int X, Y;
 
@@ -33,7 +33,7 @@ void loop()
     {
       LED_Matrix.setLed(0, X, Y, true);
 
-      delay(Time);
+      delay(Time_Delay);
 
       LED_Matrix.setLed(0, X, Y, false);
     }
