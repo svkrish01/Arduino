@@ -8,7 +8,7 @@ Board       - Arduino Uno R3
 
 const int SW = 6;
 
-const int Delay = 500;
+const int Time_Delay = 500;
 
 int X, Y;
 
@@ -29,7 +29,7 @@ void loop()
  Serial.print(", Y : ");
  Serial.println(Y);
 
- delay(Delay);
+ delay(Time_Delay);
 }
 
 
