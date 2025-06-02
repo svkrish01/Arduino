@@ -12,19 +12,18 @@ const int DIN = 10;
 const int CS = 11;
 const int CLK = 12;
 const int SW = 6;
-LedControl LED_Matrix(DIN, CLK, CS, 1);
 
 const byte Astonished_Face[8] = {B00111100, B01000010, B10100101, B10000001, B10011001, B10011001, B01000010, B00111100};
-
-const int Delay = 500;
+const int Time_Delay = 500;
 
 int X, Y;
 int Old_Direction, New_Direction;
-
 int Length;
 int Snake[64][2];
 int Fruit[2];
 int Head[2];
+
+LedControl LED_Matrix(DIN, CLK, CS, 1);
 
 int ModWrap(int x, int y)
 {
@@ -195,7 +194,7 @@ void loop()
  Update_Matrix();
 
  Old_Direction = New_Direction;
- delay(Delay);
+ delay(Time_Delay);
 }
 
 
