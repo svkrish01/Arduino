@@ -1,0 +1,32 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 11-06-2025
+Board       - Arduino Uno R3
+*/
+
+//Passive Buzzer Tester
+
+const int Buzzer_Pin = 4;
+
+const int Time_Delay = 1000;
+
+void setup()
+{
+  pinMode(Buzzer_Pin, OUTPUT);
+}
+
+void loop()
+{
+  tone(Buzzer_Pin, 750, 500);
+  delay(Time_Delay);
+
+  tone(Buzzer_Pin, 1250, 500);
+  delay(Time_Delay);
+}
+
+
+/*
+Connections -
+Buzzer Anode    - Digital Pin 4
+Buzzer Cathode  - Ground
+*/
