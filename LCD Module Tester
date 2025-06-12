@@ -1,0 +1,40 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-06-2025
+Board       - Arduino Uno R3
+*/
+
+//LCD Module Tester
+
+#include <LiquidCrystal.h>
+
+const int RS = 12, EN = 11, D4 = 2, D5 = 3, D6 = 4, D7 = 5;
+
+LiquidCrystal My_LCD(RS, EN, D4, D5, D6, D7);
+
+void setup()
+{
+  My_LCD.begin(16, 2);
+
+  My_LCD.print("Hello, World!");
+}
+
+void loop()
+{
+  delay(1000);
+}
+
+
+/*
+Connections -
+LCD VDD Pin - 5V
+LCD VSS     - Ground
+LCD V0      - 10kΩ Trim-Potentiometer Wiper between 5V and Ground
+LCD RS Pin  - Digital Pin 12
+LCD RW Pin  - 5V
+LCD E Pin   - Digital Pin 11
+LCD D4 Pin  - Digital Pin 2
+LCD D5 Pin  - Digital Pin 3
+LCD D6 Pin  - Digital Pin 4
+LCD D7 Pin  - Digital Pin 5
+*/
