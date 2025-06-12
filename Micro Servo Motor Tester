@@ -12,7 +12,7 @@ const int Servo_Pin = 9;
 
 const int Time_Delay = 2000;
 
-Servo MyServo;
+Servo My_Servo;
 
 void setup()
 {
@@ -21,10 +21,10 @@ void setup()
 
 void loop()
 {
-  MyServo.write(0);
+  My_Servo.write(0);
   delay(Time_Delay);
 
-  MyServo.write(180);
+  My_Servo.write(180);
   delay(Time_Delay);
 }
 
