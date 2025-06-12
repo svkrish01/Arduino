@@ -31,7 +31,7 @@ void loop()
 
 /*
 Connections -
-VCC     - 5V
-GND     - Ground
-Control - Digital Pin 9
+Servo VCC     - 5V
+Servo GND     - Ground
+Servo Control - Digital Pin 9
 */
