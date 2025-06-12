@@ -6,7 +6,7 @@ Board       - Arduino Uno R3
 
 //Micro Servo Motor Tester
 
-#include<Servo.h>
+#include <Servo.h>
 
 const int Servo_Pin = 9;
 
