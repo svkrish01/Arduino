@@ -26,15 +26,17 @@ void loop()
 
 
 /*
-Connections -
-LCD VDD Pin - 5V
-LCD VSS     - Ground
-LCD V0      - 10kΩ Trim-Potentiometer Wiper between 5V and Ground
-LCD RS Pin  - Digital Pin 12
-LCD RW Pin  - 5V
-LCD E Pin   - Digital Pin 11
-LCD D4 Pin  - Digital Pin 2
-LCD D5 Pin  - Digital Pin 3
-LCD D6 Pin  - Digital Pin 4
-LCD D7 Pin  - Digital Pin 5
+LCD Connections -
+VDD     - 5V
+VSS     - Ground
+V0      - 10kΩ Trim-Potentiometer Wiper between 5V and Ground
+RS      - Digital Pin 12
+RW      - 5V
+E       - Digital Pin 11
+D4 Pin  - Digital Pin 2
+D5 Pin  - Digital Pin 3
+D6 Pin  - Digital Pin 4
+D7 Pin  - Digital Pin 5
+A       - 5V
+K       - Ground
 */
