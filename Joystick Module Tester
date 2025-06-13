@@ -34,7 +34,7 @@ void loop()
 
 
 /*
-Connections -
+Joystick Module Connections -
 VCC     - 5V
 GND     - Ground
 SW      - Digital Pin 6
