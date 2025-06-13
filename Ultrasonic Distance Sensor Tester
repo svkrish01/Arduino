@@ -49,7 +49,7 @@ void loop()
 
 
 /*
-Connections -
+Ultrasonic Distance Sensor Connections -
 VCC             - 5V
 GND             - Ground
 Trigger Pin     - Digital Pin 8
