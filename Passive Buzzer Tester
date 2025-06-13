@@ -26,7 +26,7 @@ void loop()
 
 
 /*
-Connections -
-Buzzer Anode    - Digital Pin 4
-Buzzer Cathode  - Ground
+Buzzer Connections -
+Anode     - Digital Pin 4
+Cathode   - Ground
 */
