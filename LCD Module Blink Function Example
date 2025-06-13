@@ -1,0 +1,56 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 13-06-2025
+Board       - Arduino Uno R3
+*/
+
+//LCD Module Blink Function Example
+
+#include <LiquidCrystal.h>
+
+const int RS = 12, EN = 11, D4 = 2, D5 = 3, D6 = 4, D7 = 5;
+
+const int Time_Delay = 1500;
+
+LiquidCrystal My_LCD(RS, EN, D4, D5, D6, D7);
+
+void setup()
+{
+  My_LCD.begin(16, 2);
+
+  My_LCD.print("Blink");
+  My_LCD.setCursor(0, 1);
+  My_LCD.print("Example....");
+
+  delay(Time_Delay);
+
+  My_LCD.clear();
+
+  My_LCD.print("Hello, World!");
+}
+
+void loop()
+{
+  My_LCD.noBlink();
+  delay(Time_Delay);
+
+  My_LCD.blink();
+  delay(Time_Delay);
+}
+
+
+/*
+LCD Module Connections -
+VDD     - 5V
+VSS     - Ground
+V0      - 10kΩ Trim-Potentiometer Wiper between 5V and Ground
+RS      - Digital Pin 12
+RW      - 5V
+E       - Digital Pin 11
+D4 Pin  - Digital Pin 2
+D5 Pin  - Digital Pin 3
+D6 Pin  - Digital Pin 4
+D7 Pin  - Digital Pin 5
+A       - 5V
+K       - Ground
+*/
