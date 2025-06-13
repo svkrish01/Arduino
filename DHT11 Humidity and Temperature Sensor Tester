@@ -4,7 +4,7 @@ Date        - 11-06-2025
 Board       - Arduino Uno R3
 */
 
-//Humidity and Temperature Sensor Tester
+//DHT11 Humidity and Temperature Sensor Tester
 
 #include <DHT.h>
 
@@ -40,9 +40,9 @@ void loop()
 
 
 /*
-Connections -
-DHT11 VCC Pin     - 5V
-DHT11 Ground Pin  - Ground
-DHT11 Data Pin    - Digital Pin 9
-Pull Up Resistor  - 10kΩ Resistor between DHT11 VCC Pin and DHT11 Data Pin
+DHT11 Humidity and Temperature Sensor Connections -
+VCC Pin     - 5V
+Ground Pin  - Ground
+Data Pin    - Digital Pin 9
+Data Pin    - 10kΩ Pull-Up Resistor to 5V
 */
