@@ -4,7 +4,7 @@ Date        - 13-06-2025
 Board       - Arduino Uno R3
 */
 
-//LCD Module Autoscroll Function Example
+//LCD Module Autoscroll Example
 
 #include <LiquidCrystal.h>
 
