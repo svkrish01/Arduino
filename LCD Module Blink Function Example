@@ -18,7 +18,7 @@ void setup()
 {
   My_LCD.begin(16, 2);
 
-  My_LCD.print("Blink");
+  My_LCD.print("Blink Function");
   My_LCD.setCursor(0, 1);
   My_LCD.print("Example....");
 
