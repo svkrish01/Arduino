@@ -199,14 +199,14 @@ void loop()
 
 
 /*
-Joystick Connections -
+Joystick Module Connections -
 VCC     - 5V
 GND     - Ground
 SW      - Digital Pin 6
 VRX     - Analog Pin 0
 VRY     - Analog Pin 1
 
-8*8 LED Matrix Connections -
+8*8 LED Matrix Module Connections -
 VCC     - 5V
 GND     - Ground
 DIN     - Digital Pin 10
