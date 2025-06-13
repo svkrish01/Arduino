@@ -35,7 +35,7 @@ void loop()
 
 
 /*
-Connections -
+8*8 LED Matrix Module Connections -
 VCC     - 5V
 GND     - Ground
 DIN     - Digital Pin 10
