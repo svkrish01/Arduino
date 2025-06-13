@@ -30,8 +30,8 @@ void loop()
 
 
 /*
-Connections -
-Servo VCC Pin     - 5V
-Servo GND Pin     - Ground
-Servo Control Pin - Digital Pin 9
+Micro Servo Motor Connections -
+VCC Pin     - 5V
+GND Pin     - Ground
+Control Pin - Digital Pin 9
 */
