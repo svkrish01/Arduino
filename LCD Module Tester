@@ -26,7 +26,7 @@ void loop()
 
 
 /*
-LCD Connections -
+LCD Module Connections -
 VDD     - 5V
 VSS     - Ground
 V0      - 10kΩ Trim-Potentiometer Wiper between 5V and Ground
