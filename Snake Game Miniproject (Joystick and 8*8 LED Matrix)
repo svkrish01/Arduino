@@ -14,7 +14,7 @@ const int CLK = 12;
 const int SW = 6;
 
 const int Time_Delay = 500;
-const byte Astonished_Face[8] = {0b00111100, 0b01000010, 0b10011000, 0b10011001, 0b10000001, 0b10100101, 0b01000010, 0b00111100};
+const byte Astonished_Face[8] = {0b00111100, 0b01000010, 0b10011001, 0b10011001, 0b10000001, 0b10100101, 0b01000010, 0b00111100};
 
 int X, Y;
 int Old_Direction, New_Direction;
