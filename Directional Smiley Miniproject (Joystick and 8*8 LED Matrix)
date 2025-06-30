@@ -29,39 +29,39 @@ LedControl LED_Matrix(DIN, CLK, CS, 1);
 
 int Joystick_Orientation()
 {
- X = analogRead(A0);
- Y = analogRead(A1);
+  X = analogRead(A0);
+  Y = analogRead(A1);
 
- if(Y <= 256)
- {
-  Joystick_Direction = 1;
- }
- else if(Y >= 768)
- {
-  Joystick_Direction = 3;
- }
- else if(X <= 256)
- {
-  Joystick_Direction = 4;
- }
- else if(X >= 768)
- {
-  Joystick_Direction = 2;
- }
- else
- {
-  Joystick_Direction = 0;
- }
+  if(Y <= 256)
+  {
+    Joystick_Direction = 1;
+  }
+  else if(Y >= 768)
+  {
+    Joystick_Direction = 3;
+  }
+  else if(X <= 256)
+  {
+    Joystick_Direction = 4;
+  }
+  else if(X >= 768)
+  {
+    Joystick_Direction = 2;
+  }
+  else
+  {
+    Joystick_Direction = 0;
+  }
 
- Serial.print("Orientation : ");
- Serial.print(Joystick_Direction);
- Serial.print(" (X : ");
- Serial.print(X);
- Serial.print(", Y : ");
- Serial.print(Y);
- Serial.println(")");
+  Serial.print("Orientation : ");
+  Serial.print(Joystick_Direction);
+  Serial.print(" (X : ");
+  Serial.print(X);
+  Serial.print(", Y : ");
+  Serial.print(Y);
+  Serial.println(")");
 
- return Joystick_Direction;
+  return Joystick_Direction;
 }
 
 void LEDMatrix_Orientation(int LEDMatrix_Direction)
@@ -85,10 +85,10 @@ void setup()
 
 void loop()
 {
- Direction = Joystick_Orientation();
- LEDMatrix_Orientation(Direction);
+  Direction = Joystick_Orientation();
+  LEDMatrix_Orientation(Direction);
 
- delay(Time_Delay);
+  delay(Time_Delay);
 }
 
 
