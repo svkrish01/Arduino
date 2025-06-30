@@ -33,6 +33,39 @@ int ModWrap(int x, int y)
   else {return r;}
 }
 
+void Start()
+{
+  LED_Matrix.shutdown(0, false);
+  LED_Matrix.setIntensity(0, 8);
+  LED_Matrix.clearDisplay(0);
+
+  Old_Direction = 1;
+  New_Direction = 1;
+  Length = 3;
+
+  for(X = 0; X < 64 ; X++)
+  {
+    for(Y = 0; Y < 2; Y++)
+    {
+      Snake[X][Y] = 0;
+    }
+  }
+
+  Snake[0][0] = 2;
+  Snake[0][1] = 6;
+  Snake[1][0] = 1;
+  Snake[1][1] = 6;
+  Snake[2][0] = 0;
+  Snake[2][1] = 6;  
+  Fruit[0] = 4;
+  Fruit[1] = 3;
+  Head[0] = 3;
+  Head[1] = 6;
+
+  Update_Matrix();
+  delay(Time_Delay);
+}
+
 int Next_Snake_Orientation(int Old_Joystick_Orientation)
 {
   X = analogRead(A0);
@@ -70,14 +103,19 @@ void Check_Collision()
       }
     }
 
-  while(Check == 1)
+  if(Check == 1)
   {
     for(X = 0; X <= 7; X++)
     {
      LED_Matrix.setRow(0, X, Astonished_Face[X]);
     }
 
-    delay(1000);
+    Check = 0;
+    delay(5000);
+
+    Start();
+
+    Update_Head(New_Direction);
   }
 }
 
@@ -158,29 +196,7 @@ void setup()
 {
   pinMode(SW, INPUT_PULLUP);
 
-  LED_Matrix.shutdown(0, false);
-  LED_Matrix.setIntensity(0, 8);
-  LED_Matrix.clearDisplay(0);
-
-  Old_Direction = 1;
-  Length = 3;
-
-  for(X = 0; X < 64 ; X++)
-  {
-    for(Y = 0; Y < 2; Y++)
-    {
-      Snake[X][Y] = 0;
-    }
-  }
-
-  Snake[0][0] = 3;
-  Snake[0][1] = 6;
-  Snake[1][0] = 2;
-  Snake[1][1] = 6;
-  Snake[2][0] = 1;
-  Snake[2][1] = 6;  
-  Fruit[0] = 4;
-  Fruit[1] = 3;
+  Start();
 
   Serial.begin(9600);
 }
