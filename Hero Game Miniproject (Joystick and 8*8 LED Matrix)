@@ -1,0 +1,65 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 26-05-2025
+Board       - Arduino Uno R3
+*/
+
+//Hero Game Miniproject (Joystick and 8*8 LED Matrix)
+
+#include <LedControl.h>
+
+const int DIN = 10;
+const int CS = 11;
+const int CLK = 12;
+const int SW = 6;
+
+const int Time_Delay = 500;
+const byte Astonished_Face[8] = {0b00111100, 0b01000010, 0b10011001, 0b10011001, 0b10000001, 0b10100101, 0b01000010, 0b00111100};
+
+int Tank_Head[2];
+
+LedControl LED_Matrix(DIN, CLK, CS, 1);
+
+/*int ModWrap(int x, int y)
+{
+  int r = x % y;
+
+  if (r == 0){return y;}
+  else {return r;}
+}*/
+
+
+void setup()
+{
+  pinMode(SW, INPUT_PULLUP);
+
+  Tank_Head[0] = 6;
+  Tank_Head[1] = 7;
+
+  LED_Matrix.setLed(0, Tank_Head[0], Tank_Head[1], true);
+
+  Serial.begin(9600);
+}
+
+
+void loop()
+{
+  delay(Time_Delay);
+}
+
+
+/*
+Joystick Module Connections -
+VCC     - 5V
+GND     - Ground
+SW      - Digital Pin 6
+VRX     - Analog Pin 0
+VRY     - Analog Pin 1
+
+8*8 LED Matrix Module Connections -
+VCC     - 5V
+GND     - Ground
+DIN     - Digital Pin 10
+CS      - Digital Pin 11
+CLK     - Digital Pin 12
+*/
