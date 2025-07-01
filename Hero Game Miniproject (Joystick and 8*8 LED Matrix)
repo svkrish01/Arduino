@@ -14,29 +14,282 @@ const int CLK = 12;
 const int SW = 6;
 
 const int Time_Delay = 500;
+const byte Happy_Face[8] = {0b00111100, 0b01000010, 0b10011001, 0b10100101, 0b10000001, 0b10100101, 0b01000010, 0b00111100};
 const byte Astonished_Face[8] = {0b00111100, 0b01000010, 0b10011001, 0b10011001, 0b10000001, 0b10100101, 0b01000010, 0b00111100};
 
+int Tank_Direction = 1;
+
+int X, Y;
+int Check_Wall_H;
+int Check_Wall_V;
+int Hero_Direction;
+int Hero[2];
 int Tank_Head[2];
+int Tank[4][2];
+int Walls[2][3][2];
 
 LedControl LED_Matrix(DIN, CLK, CS, 1);
 
-/*int ModWrap(int x, int y)
+void Start()
 {
-  int r = x % y;
+  LED_Matrix.clearDisplay(0);
 
-  if (r == 0){return y;}
-  else {return r;}
-}*/
+  Check_Wall_H = 0;
+  Check_Wall_V = 0;
+
+  Tank_Head[0] = 6;
+  Tank_Head[1] = 7;
+
+  Hero[0] = 1;
+  Hero[1] = 4;
+
+  Update_Tank();
+  Update_Display();
+
+  delay(Time_Delay);
+}
+
+void Update_Tank_Head()
+{
+  if(Tank_Head[1] == 1 || Tank_Head[1] == 7)
+  {
+    Tank_Direction = -Tank_Direction;
+  }
+
+  Tank_Head[1] += Tank_Direction;
+}
+
+void Update_Tank()
+{
+  for(X = 0; X < 4; X++)
+  {
+    Tank[X][0] = Tank_Head[0] - (X/2);
+    Tank[X][1] = Tank_Head[1] - (X%2);
+  }
+}
+
+void Update_Display()
+{
+  LED_Matrix.clearDisplay(0);
+
+  for(X = 0; X < 4; X++)
+  {
+    LED_Matrix.setLed(0, Tank[X][0], Tank[X][1], true);
+  }
+
+  if(Check_Wall_H == 1)
+  {
+    for(X = 0; X < 3; X++)
+    {
+      LED_Matrix.setLed(0, Walls[0][X][0], Walls[0][X][1], true);
+    }
+  }
+
+  if(Check_Wall_V == 1)
+  {
+    for(X = 0; X < 3; X++)
+    {
+      LED_Matrix.setLed(0, Walls[1][X][0], Walls[1][X][1], true);
+    }
+  }
+
+  LED_Matrix.setLed(0, Hero[0], Hero[1], true);
+}
+
+int Hero_Movement()
+{
+  X = analogRead(A0);
+  Y = analogRead(A1);
+
+  int New_Hero_Direction;
+
+  if(Y <= 256 && Hero[0] != 7){New_Hero_Direction = 1;}
+  else if(Y >= 768 && Hero[0] != 0){New_Hero_Direction = 3;}
+  else if(X <= 256 && Hero[1] != 7){New_Hero_Direction = 4;}
+  else if(X >= 768 && Hero[1] != 0){New_Hero_Direction = 2;}
+  else{New_Hero_Direction = 0;}
+
+  if(New_Hero_Direction == 1 && Check_Wall_H == 0)
+  {
+    Wall_Up(New_Hero_Direction);
+  }
+  else if(New_Hero_Direction == 2 && Check_Wall_V == 0)
+  {
+    Wall_Up(New_Hero_Direction);
+  }
+  else if(New_Hero_Direction == 4 && Check_Wall_V == 0)
+  {
+    Wall_Up(New_Hero_Direction);
+  }
+
+  New_Hero_Direction = Check_Wall(New_Hero_Direction);
+
+  Serial.print("Orientation : ");
+  Serial.print(New_Hero_Direction);
+  Serial.print(" (X : ");
+  Serial.print(X);
+  Serial.print(", Y : ");
+  Serial.print(Y);
+  Serial.println(")");
+
+  return New_Hero_Direction;
+}
+
+void Update_Hero(int Direction)
+{
+  if(Direction == 1)
+  {
+    Hero[0] += 1;
+  }
+  else if(Direction == 2)
+  {
+    Hero[1] -= 1;
+  }
+  else if(Direction == 3)
+  {
+    Hero[0] -= 1;
+  }
+  else if(Direction == 4)
+  {
+    Hero[1] += 1;
+  }
+}
+
+void Wall_Up(int Direction)
+{
+  if(Direction == 1)
+  {
+    Check_Wall_H = 1;
+
+    for(X = -1; X < 2; X++)
+    {
+      Walls[0][1 + X][0] = Hero[0] + 3;
+      Walls[0][1 + X][1] = Hero[1] + X;
+    }
+
+    if(Walls[0][0][1] == -1){Walls[0][0][1] += 3;}
+    else if(Walls[0][2][1] == 8){Walls[0][2][1] -= 3;}
+  }
+  else if(Direction == 2 || Direction == 4)
+  {
+    Check_Wall_V = 1;
+
+    int Change = (Direction == 2) ? -3 : 3;                   
+
+    for(X = -1; X < 2; X++)
+    {
+      Walls[1][1 + X][0] = Hero[0] + X;
+      Walls[1][1 + X][1] = Hero[1] + Change;
+    }
+
+    if(Walls[1][0][0] == -1){Walls[1][0][0] += 3;}
+  }
+}
+
+int Check_Wall(int Direction)
+{
+  int Hero_Next[2];
+  int Check = 0;
+
+  Hero_Next[0] = Hero[0];
+  Hero_Next[1] = Hero[1];
+
+  if(Direction == 1){Hero_Next[0] += 1;}
+  else if(Direction == 2){Hero_Next[1] -= 1;}
+  else if(Direction == 3){Hero_Next[0] -= 1;}
+  else if(Direction == 4){Hero_Next[1] += 1;}
+
+  if(Check_Wall_H == 1)
+  {
+    for(X = 0; X < 3; X++)
+    {
+      if(Walls[0][X][0] == Hero_Next[0] && Walls[0][X][1] == Hero_Next[1])
+      {
+        Check = 1;
+      }
+    }
+  }
+
+  if(Check_Wall_V == 1)
+  {
+    for(X = 0; X < 3; X++)
+    {
+      if(Walls[1][X][0] == Hero_Next[0] && Walls[1][X][1] == Hero_Next[1])
+      {
+        Check = 1;
+      }
+    }
+  }
+
+  if(Check == 1)
+  {
+    return 0;
+  }
+  else
+  {
+    return Direction;
+  }
+}
+
+void Check_Collision()
+{
+  int Check = 0;
+
+  for(int X = 0; X < 4; X++)
+  {
+    if(Tank[X][0] == Hero[0] && Tank[X][1] == Hero[1])
+    {
+      Check = 1;
+    }
+  }
+
+  if(Check == 1)
+  {
+    for(X = 0; X <= 7; X++)
+    {
+     LED_Matrix.setRow(0, X, Astonished_Face[X]);
+    }
+    delay(3000);
+
+    Tank_Direction = 1;
+    Start();
+  }
+}
+
+void Check_Win()
+{
+  int Check = 0;
+
+  for(int X = 0; X < 4; X++)
+  {
+    if(Hero[0] == 7 && Hero[1] == 7)
+    {
+      Check = 1;
+    }
+  }
+
+  if(Check == 1)
+  {
+    for(X = 0; X <= 7; X++)
+    {
+     LED_Matrix.setRow(0, X, Happy_Face[X]);
+    }
+    delay(3000);
+
+    Tank_Direction = 1;
+    Start();
+  }
+}
 
 
 void setup()
 {
   pinMode(SW, INPUT_PULLUP);
 
-  Tank_Head[0] = 6;
-  Tank_Head[1] = 7;
-
-  LED_Matrix.setLed(0, Tank_Head[0], Tank_Head[1], true);
+  LED_Matrix.shutdown(0, false);
+  LED_Matrix.setIntensity(0, 8);
+  
+  Start();
 
   Serial.begin(9600);
 }
@@ -44,7 +297,17 @@ void setup()
 
 void loop()
 {
+  Update_Tank_Head();
+  Update_Tank();
+  Update_Display();
+
+  Hero_Direction = Hero_Movement();
+  Update_Hero(Hero_Direction);
+
   delay(Time_Delay);
+
+  Check_Collision();
+  Check_Win();
 }
 
 
