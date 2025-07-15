@@ -16,7 +16,7 @@ Servo My_Servo;
 
 void setup()
 {
-  MyServo.attach(Servo_Pin);
+  My_Servo.attach(Servo_Pin);
 }
 
 void loop()
