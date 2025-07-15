@@ -1,0 +1,62 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 15-07-2025
+Board       - Arduino Uno R3
+*/
+
+//Joystick controlled Micro Servo Motor
+
+#include <Servo.h>
+
+const int SW = 6;
+const int Servo_Pin = 9;
+
+const int Time_Delay = 1000;
+
+int X, Y;
+int Angle;
+
+Servo My_Servo;
+
+void setup()
+{
+  pinMode(SW, INPUT_PULLUP);
+  
+  My_Servo.attach(Servo_Pin);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  X = analogRead(A0);
+  Y = analogRead(A1);
+
+  Serial.print("X : ");
+  Serial.print(X);
+  Serial.print(", Y : ");
+  Serial.print(Y);
+
+  Angle = map(X, 0, 1024, 0, 180);
+
+  Serial.print(", Angle : ");
+  Serial.println(Angle);
+
+  My_Servo.write(Angle);
+
+  delay(Time_Delay);
+}
+
+
+/*
+Joystick Module Connections -
+VCC     - 5V
+GND     - Ground
+SW      - Digital Pin 6
+VRX     - Analog Pin 0
+VRY     - Analog Pin 1
+
+Micro Servo Motor Connections -
+VCC Pin     - 5V
+GND Pin     - Ground
+Control Pin - Digital Pin 9
+*/
