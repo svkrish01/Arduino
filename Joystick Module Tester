@@ -21,15 +21,15 @@ void setup()
 
 void loop()
 {
- X = analogRead(A0);
- Y = analogRead(A1);
+  X = analogRead(A0);
+  Y = analogRead(A1);
 
- Serial.print("X : ");
- Serial.print(X);
- Serial.print(", Y : ");
- Serial.println(Y);
+  Serial.print("X : ");
+  Serial.print(X);
+  Serial.print(", Y : ");
+  Serial.println(Y);
 
- delay(Time_Delay);
+  delay(Time_Delay);
 }
 
 
