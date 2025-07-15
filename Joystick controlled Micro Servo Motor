@@ -9,11 +9,13 @@ Board       - Arduino Uno R3
 #include <Servo.h>
 
 const int SW = 6;
+const int LED_SW = 2;
 const int Servo_Pin = 9;
 
-const int Time_Delay = 1000;
+const int Time_Delay = 500;
 
 int X, Y;
+bool SW_State;
 int Angle;
 
 Servo My_Servo;
@@ -21,6 +23,7 @@ Servo My_Servo;
 void setup()
 {
   pinMode(SW, INPUT_PULLUP);
+  pinMode(SW_State, OUTPUT);
   
   My_Servo.attach(Servo_Pin);
   Serial.begin(9600);
@@ -30,11 +33,16 @@ void loop()
 {
   X = analogRead(A0);
   Y = analogRead(A1);
+  SW_State = digitalRead(SW);
 
   Serial.print("X : ");
   Serial.print(X);
   Serial.print(", Y : ");
   Serial.print(Y);
+  Serial.print(", SW : ");
+  Serial.print(SW_State);
+
+  digitalWrite(LED_SW, !SW_State);
 
   Angle = map(X, 0, 1024, 0, 180);
 
