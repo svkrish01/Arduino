@@ -1,0 +1,51 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 16-07-2025
+Board       - Arduino Uno R3
+*/
+
+//RGB LED Tester
+
+const int LED_R_Pin = 9;
+const int LED_G_Pin = 10;
+const int LED_B_Pin = 11;
+
+const int Time_Delay = 1000;
+
+void Set_RGB(int Value_R, int Value_G, int Value_B)
+{
+  analogWrite(LED_R_Pin, Value_R);
+  analogWrite(LED_G_Pin, Value_G);
+  analogWrite(LED_B_Pin, Value_B);
+}
+
+
+void setup()
+{
+  pinMode(LED_R_Pin, OUTPUT);
+  pinMode(LED_G_Pin, OUTPUT);
+  pinMode(LED_B_Pin, OUTPUT);
+}
+
+void loop()
+{
+  Set_RGB(255, 0, 0);
+  delay(Time_Delay);
+  Set_RGB(0, 255, 0);
+  delay(Time_Delay);
+  Set_RGB(0, 0, 255);
+  delay(Time_Delay);
+
+  Set_RGB(0, 255, 255);
+  delay(Time_Delay);
+  Set_RGB(255, 0, 255);
+  delay(Time_Delay);
+  Set_RGB(255, 255, 0);
+  delay(Time_Delay);
+
+  Set_RGB(255, 255, 255);
+  delay(Time_Delay);
+
+  Set_RGB(0, 0, 0);
+  delay(Time_Delay);
+}
