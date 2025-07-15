@@ -4,7 +4,7 @@ Date        - 15-07-2025
 Board       - Arduino Uno R3
 */
 
-//Joystick controlled Micro Servo Motor
+//Joystick Module controlled Micro Servo Motor
 
 #include <Servo.h>
 
