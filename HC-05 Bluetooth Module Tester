@@ -1,0 +1,50 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 14-07-2025
+Board       - Arduino Uno R3
+
+*/
+
+//HC-05 Bluetooth Module Tester
+
+const int LED_Pin = 13;
+
+const int Time_Delay = 1000;
+
+char Input;
+
+void setup()
+{
+  pinMode(LED_Pin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  if(Serial.available())
+  {
+    Input = Serial.read();
+
+    Serial.print("Input Value : ");
+    Serial.println(Input);
+
+    if(Input == '1')
+    {
+      digitalWrite(13, HIGH);
+    }
+    else if(Input == '0')
+    {
+      digitalWrite(13, LOW);
+    }
+  }
+}
+
+
+/*
+HC-05 Bluetooth Module Connections -
+VCC     - 5V
+GND     - Ground
+TX      - RX Pin
+RX      - TX Pin
+*/
