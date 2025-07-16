@@ -31,3 +31,10 @@ void loop()
 
   Change = -Change;
 }
+
+
+/*
+LED Connections -
+Anode     - Digital Pin 11
+Cathode   - 220Ω Resistor from Ground
+*/
