@@ -1,0 +1,33 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-07-2025
+Board       - Arduino Uno R3
+*/
+
+//Breathing LED
+
+const int LED_Pin = 11;
+
+const int Time_Delay = 25;
+
+int LED_Brightness = 0;
+int Change = 5;
+
+void setup()
+{
+  pinMode(LED_Pin, OUTPUT);
+}
+
+void loop()
+{
+  do
+  {
+    analogWrite(LED_Pin, LED_Brightness);
+
+    LED_Brightness += Change;
+    delay(Time_Delay);
+  }
+  while(LED_Brightness > 0 && LED_Brightness < 255);
+
+  Change = -Change;
+}
