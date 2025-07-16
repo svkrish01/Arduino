@@ -23,3 +23,10 @@ void loop()
   digitalWrite(LED_Pin, LOW);
   delay(Time_Delay);
 }
+
+
+/*
+LED Connections -
+Anode     - Digital Pin 13
+Cathode   - 220Ω Resistor from Ground
+*/
