@@ -1,0 +1,80 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 17-07-2025
+Board       - Arduino Uno R3
+*/
+
+//HC-05 Bluetooth Module controlled RGB LED
+
+const int LED_R_Pin = 9;
+const int LED_G_Pin = 10;
+const int LED_B_Pin = 11;
+
+const int Time_Delay = 50;
+
+String Input;
+int Value_R;
+int Value_G;
+int Value_B;
+
+void Set_RGB(int Value_R, int Value_G, int Value_B)
+{
+  analogWrite(LED_R_Pin, Value_R);
+  analogWrite(LED_G_Pin, Value_G);
+  analogWrite(LED_B_Pin, Value_B);
+}
+
+
+void setup()
+{
+  pinMode(LED_R_Pin, OUTPUT);
+  pinMode(LED_G_Pin, OUTPUT);
+  pinMode(LED_B_Pin, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  if(Serial.available())
+  {
+    Input = Serial.readStringUntil('\n');
+    Input.trim();
+
+    if(Input.length() == 9)
+    {
+      Value_R = Input.substring(0, 3).toInt();
+      Value_G = Input.substring(3, 6).toInt();
+      Value_B = Input.substring(6).toInt();
+
+      Serial.print("Input Value : ");
+      Serial.print(Input);
+      Serial.print(", Red Value : ");
+      Serial.print(Value_R);
+      Serial.print(", Green Value : ");
+      Serial.print(Value_G);
+      Serial.print(", Blue Value : ");
+      Serial.println(Value_B);
+
+      Set_RGB(Value_R, Value_G, Value_B);
+    }
+  }
+
+  delay(Time_Delay);
+}
+
+
+
+/*
+HC-05 Bluetooth Module Connections -
+VCC     - 5V
+GND     - Ground
+TX      - RX Pin
+RX      - TX Pin
+
+RGB LED Connections -
+Red Anode         - Digital Pin 9
+Green Anode       - Digital Pin 10
+Blue Anode        - Digital Pin 11
+Common Cathode    - 220Ω Resistor from Ground
+*/
