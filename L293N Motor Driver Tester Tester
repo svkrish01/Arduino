@@ -1,0 +1,112 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 10-09-2025
+Board       - Arduino Uno R3
+*/
+
+//L293N Motor Driver Tester Tester
+
+const int EN_A = 12;
+const int IN_1 = 11;
+const int IN_2 = 10;
+const int IN_3 = 6;
+const int IN_4 = 5;
+const int EN_B = 4;
+
+const int Time_Delay = 500;
+
+void Right_Wheel_Forward()
+{
+  digitalWrite(EN_A, HIGH);
+  digitalWrite(IN_1, HIGH);
+  digitalWrite(IN_2, LOW);
+}
+
+void Right_Wheel_Backward()
+{
+  digitalWrite(EN_A, HIGH);
+  digitalWrite(IN_1, LOW);
+  digitalWrite(IN_2, HIGH);
+}
+
+void Right_Wheel_Stop()
+{
+  digitalWrite(EN_A, LOW);
+  digitalWrite(IN_1, LOW);
+  digitalWrite(IN_2, LOW);
+}
+
+void Left_Wheel_Forward()
+{
+  digitalWrite(EN_B, HIGH);
+  digitalWrite(IN_3, LOW);
+  digitalWrite(IN_4, HIGH);
+}
+
+void Left_Wheel_Backward()
+{
+  digitalWrite(EN_B, HIGH);
+  digitalWrite(IN_3, HIGH);
+  digitalWrite(IN_4, LOW);
+}
+
+void Left_Wheel_Stop()
+{
+  digitalWrite(EN_B, LOW);
+  digitalWrite(IN_3, LOW);
+  digitalWrite(IN_4, LOW);
+}
+
+
+void setup() 
+{
+  pinMode(EN_A, OUTPUT);
+  pinMode(IN_1, OUTPUT);
+  pinMode(IN_2, OUTPUT);
+  pinMode(IN_3, OUTPUT);
+  pinMode(IN_4, OUTPUT);
+  pinMode(EN_B, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  Left_Wheel_Forward();
+  Right_Wheel_Forward();
+
+  delay(Time_Delay);
+
+  Left_Wheel_Stop();
+  Right_Wheel_Stop();
+
+  delay(Time_Delay);
+
+  Left_Wheel_Backward();
+  Right_Wheel_Backward();
+
+  delay(Time_Delay);
+}
+
+
+/*
+L293N Motor Driver Connections -
+
+VCC Pin       - 9V
+Ground Pin    - Ground
+5V Pin        - Vin Pin
+
+Enable Pin A  - Digital Pin 12
+Input Pin 1   - Digital Pin 11
+Input Pin 2   - Digital Pin 10
+
+Enable Pin B  - Digital Pin 4
+Input Pin 3   - Digital Pin 5
+Input Pin 4   - Digital Pin 6
+
+Output Pin 1  - Right BO Motor
+Output Pin 2  - Right BO Motor
+
+Output Pin 3  - Left BO Motor
+Output Pin 4  - Left BO Motor
+*/
