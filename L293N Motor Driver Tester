@@ -6,12 +6,12 @@ Board       - Arduino Uno R3
 
 //L293N Motor Driver Tester
 
-const int EN_A = 12;
-const int IN_1 = 11;
-const int IN_2 = 10;
-const int IN_3 = 6;
-const int IN_4 = 5;
-const int EN_B = 4;
+const int EN_A = 10;
+const int IN_1 = 9;
+const int IN_2 = 8;
+const int IN_3 = 7;
+const int IN_4 = 6;
+const int EN_B = 5;
 
 const int Time_Delay = 500;
 
@@ -96,13 +96,13 @@ VCC Pin       - 9V
 Ground Pin    - Ground
 5V Pin        - Vin Pin
 
-Enable Pin A  - Digital Pin 12
-Input Pin 1   - Digital Pin 11
-Input Pin 2   - Digital Pin 10
+Enable Pin A  - Digital Pin 10
+Input Pin 1   - Digital Pin 9
+Input Pin 2   - Digital Pin 8
 
-Enable Pin B  - Digital Pin 4
-Input Pin 3   - Digital Pin 5
-Input Pin 4   - Digital Pin 6
+Enable Pin B  - Digital Pin 5
+Input Pin 3   - Digital Pin 6
+Input Pin 4   - Digital Pin 7
 
 Output Pin 1  - Right BO Motor
 Output Pin 2  - Right BO Motor
