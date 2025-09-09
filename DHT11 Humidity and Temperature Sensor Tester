@@ -19,6 +19,7 @@ DHT My_DHT11(DHT11_Sensor_Pin, DHT11);
 void setup()
 {
   My_DHT11.begin();
+
   Serial.begin(9600);
 }
 
