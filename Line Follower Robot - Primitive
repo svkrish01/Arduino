@@ -6,6 +6,8 @@ Board       - Arduino Uno R3
 
 //Line Follower Robot - Primitive
 
+const int IR_Sensor_Right = A0;
+const int IR_Sensor_Left = A1;
 const int EN_A = 10;
 const int IN_1 = 9;
 const int IN_2 = 8;
@@ -13,44 +15,61 @@ const int IN_3 = 7;
 const int IN_4 = 6;
 const int EN_B = 5;
 
-const int Time_Delay = 500;
+const int Time_Delay = 10;
+
+int IR_Sensor_Right_Value;
+int IR_Sensor_Left_Value;
 
 void Right_Bend()
 {
-  analogWrite(EN_A, 127);
+  analogWrite(EN_A, 31);
   digitalWrite(IN_1, HIGH);
   digitalWrite(IN_2, LOW);
 
-  digitalWrite(EN_B, HIGH);
+  analogWrite(EN_B, 63);
   digitalWrite(IN_3, LOW);
   digitalWrite(IN_4, HIGH);
 }
 
 void Forward()
 {
-  digitalWrite(EN_A, HIGH);
+  analogWrite(EN_A, 63);
   digitalWrite(IN_1, HIGH);
   digitalWrite(IN_2, LOW);
 
-  digitalWrite(EN_B, HIGH);
+  analogWrite(EN_B, 63);
   digitalWrite(IN_3, LOW);
   digitalWrite(IN_4, HIGH);
 }
 
 void Left_Bend()
 {
-  digitalWrite(EN_A, HIGH);
+  analogWrite(EN_A, 63);
   digitalWrite(IN_1, HIGH);
   digitalWrite(IN_2, LOW);
 
-  analogWrite(EN_B, 127);
+  analogWrite(EN_B, 31);
   digitalWrite(IN_3, LOW);
   digitalWrite(IN_4, HIGH);
+}
+
+void Stop()
+{
+  analogWrite(EN_A, 0);
+  digitalWrite(IN_1, LOW);
+  digitalWrite(IN_2, LOW);
+
+  analogWrite(EN_B, 0);
+  digitalWrite(IN_3, LOW);
+  digitalWrite(IN_4, LOW);
 }
 
 
 void setup() 
 {
+  pinMode(IR_Sensor_Right, INPUT);
+  pinMode(IR_Sensor_Left, INPUT);
+
   pinMode(EN_A, OUTPUT);
   pinMode(IN_1, OUTPUT);
   pinMode(IN_2, OUTPUT);
@@ -63,15 +82,25 @@ void setup()
 
 void loop() 
 {
-  Forward();
+  IR_Sensor_Right_Value = analogRead(IR_Sensor_Right);
+  IR_Sensor_Left_Value = analogRead(IR_Sensor_Left);
 
-  delay(Time_Delay);
-
-  Right_Bend();
-
-  delay(Time_Delay);
-
-  Left_Bend();
+  if(IR_Sensor_Right_Value < 512 && IR_Sensor_Left_Value < 512)
+  {
+    Forward();
+  }
+  else if(IR_Sensor_Right_Value > 512 && IR_Sensor_Left_Value < 512)
+  {
+    Right_Bend();
+  }
+  else if(IR_Sensor_Right_Value < 512 && IR_Sensor_Left_Value > 512)
+  {
+    Left_Bend();
+  }
+  else
+  {
+    Stop();
+  }
 
   delay(Time_Delay);
 }
