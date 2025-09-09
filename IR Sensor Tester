@@ -34,5 +34,5 @@ void loop()
 IR Sensor Connections -
 VCC Pin     - 5V
 Ground Pin  - Ground
-Data Pin    - Analog Pin A0
+Data Pin    - Analog Pin 0
 */
