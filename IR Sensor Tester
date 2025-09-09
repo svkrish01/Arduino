@@ -1,6 +1,6 @@
 /*
 Developer   - Sriram Venkata Krishna
-Date        - 10-09-2025
+Date        - 09-09-2025
 Board       - Arduino Uno R3
 */
 
@@ -10,7 +10,7 @@ const int IR_Sensor_Pin = A0;
 
 const int Time_Delay = 500;
 
-int IR_Sensor_Value
+int IR_Sensor_Value;
 
 void setup() 
 {
@@ -21,7 +21,7 @@ void setup()
 
 void loop() 
 {
-  IR_Senosr_Value = analogRead(IR_Sensor_Pin);
+  IR_Sensor_Value = analogRead(IR_Sensor_Pin);
   
   Serial.print("IR Sensor Reading : ");
   Serial.println(IR_Sensor_Value);
