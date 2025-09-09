@@ -1,0 +1,38 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 10-09-2025
+Board       - Arduino Uno R3
+*/
+
+//IR Sensor Tester
+
+const int IR_Sensor_Pin = A0;
+
+const int Time_Delay = 500;
+
+int IR_Sensor_Value
+
+void setup() 
+{
+  pinMode(IR_Sensor_Pin, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  IR_Senosr_Value = analogRead(IR_Sensor_Pin);
+  
+  Serial.print("IR Sensor Reading : ");
+  Serial.println(IR_Sensor_Value);
+
+  delay(Time_Delay);
+}
+
+
+/*
+IR Sensor Connections -
+VCC Pin     - 5V
+Ground Pin  - Ground
+Data Pin    - Analog Pin A0
+*/
