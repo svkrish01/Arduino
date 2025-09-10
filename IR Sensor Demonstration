@@ -1,0 +1,46 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 10-09-2025
+Board       - Arduino Uno R3
+*/
+
+//IR Sensor Demonstration
+
+const int IR_Sensor_Pin = A0;
+
+const int Time_Delay = 500;
+const int Upper_Bound = 1024;
+const int Lower_Bound = 0;
+
+int IR_Sensor_Value;
+
+void setup() 
+{
+  pinMode(IR_Sensor_Pin, INPUT);
+
+  Serial.begin(9600);
+}
+
+void loop() 
+{
+  IR_Sensor_Value = analogRead(IR_Sensor_Pin);
+
+  Serial.print("Upper Bound : ");
+  Serial.print(Upper_Bound);
+  
+  Serial.print("\tIR Sensor Reading : ");
+  Serial.print(IR_Sensor_Value);
+
+  Serial.print("\tLower Bound : ");
+  Serial.println(Lower_Bound);
+
+  delay(Time_Delay);
+}
+
+
+/*
+IR Sensor Connections -
+VCC Pin     - 5V
+Ground Pin  - Ground
+Data Pin    - Analog Pin 0
+*/
