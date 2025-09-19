@@ -1,25 +1,23 @@
 /*
 Developer   - Sriram Venkata Krishna
-Date        - 18-05-2025
+Date        - 19-09-2025
 Board       - Arduino Uno R3
 */
 
 //Arduino Uno R3 Board Tester
 
-const int LED_Pin = 13;
-
 const int Time_Delay = 1000;
 
 void setup()
 {
-  pinMode(LED_Pin, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
 {
-  digitalWrite(LED_Pin, HIGH);
+  digitalWrite(LED_BUILTIN, HIGH);
   delay(Time_Delay);
 
-  digitalWrite(LED_Pin, LOW);
+  digitalWrite(LED_BUILTIN, LOW);
   delay(Time_Delay);
 }
