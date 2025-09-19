@@ -1,12 +1,12 @@
 /*
 Developer   - Sriram Venkata Krishna
-Date        - 17-07-2025
+Date        - 19-09-2025
 Board       - Arduino Uno R3
 */
 
 //Breathing LED
 
-const int LED_Pin = 11;
+const int LED_Pin = 13;
 
 const int Time_Delay = 25;
 
