@@ -1,0 +1,32 @@
+/*
+Developer   - Sriram Venkata Krishna
+Date        - 19-09-2025
+Board       - Arduino Uno R3
+*/
+
+//Blinking LED
+
+const int LED_Pin = 11;
+
+const int Time_Delay = 1000;
+
+void setup()
+{
+  pinMode(LED_Pin, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(LED_Pin, HIGH);
+  delay(Time_Delay);
+
+  digitalWrite(LED_Pin, LOW);
+  delay(Time_Delay);
+}
+
+
+/*
+LED Connections -
+Anode     - Digital Pin 11
+Cathode   - 220Ω Resistor from Ground
+*/
