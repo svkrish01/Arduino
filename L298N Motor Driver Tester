@@ -4,7 +4,7 @@ Date        - 10-09-2025
 Board       - Arduino Uno R3
 */
 
-//L293N Motor Driver Tester
+//L298N Motor Driver Tester
 
 const int EN_A = 10;
 const int IN_1 = 9;
